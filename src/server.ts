@@ -29,10 +29,10 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   /**************************************************************************** */
 
+
   app.get("/filteredimage", async (req, res) => {
     const imageUrl = req.query.image_url;
 
-    // check imageUrl is valid
     if (!imageUrl) {
       return res.status(400).send({
         message: "The image url is required or malformed"
