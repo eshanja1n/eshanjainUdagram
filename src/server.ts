@@ -31,22 +31,19 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
 
   app.get("/filteredimage", async (req, res) => {
-    const imageUrl = req.query.image_url;
+    const myImageURL = req.query.image_url;
 
-    if (!imageUrl) {
-      return res.status(400).send({
-        message: "The image url is required or malformed"
-      });
+    if (!myImageURL) {
+      return res.status(400).send({message: "You have either provided a bad URL or not one at all."});
     }
 
     try {
       console;
-      const filteredImageFromURL = await filterImageFromURL(imageUrl);
-      res.sendFile(filteredImageFromURL, () =>
-        deleteLocalFiles([filteredImageFromURL])
-      );
-    } catch (error) {
-      res.sendStatus(422).send("Unable to process image at the provided url");
+      const myFilteredIMAGE = await filterImageFromURL(myImageURL);
+      res.sendFile(myFilteredIMAGE, () => deleteLocalFiles([myFilteredIMAGE]));
+    } 
+      catch (error) {
+      res.sendStatus(422).send("The url you have given is not able to be processed at this moment.");
     }
   });
 
